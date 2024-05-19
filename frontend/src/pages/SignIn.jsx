@@ -14,11 +14,11 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-import { BASE_URL } from "../CONSTANTS";
+import { BASE_URL_AUTH } from "../CONSTANTS";
 
 async function signInUser(credentials) {
   try {
-    let res = await axios.post(`${BASE_URL}/login`, credentials);
+    let res = await axios.post(`${BASE_URL_AUTH}/login`, credentials);
     const token = res.status === 200 ? res.data.token : "";
     return token;
   } catch (err) {

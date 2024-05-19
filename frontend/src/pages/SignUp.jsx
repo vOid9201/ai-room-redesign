@@ -19,7 +19,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { FormControl } from "@mui/material";
 
-import { BASE_URL } from "../CONSTANTS";
+import { BASE_URL_AUTH } from "../CONSTANTS";
 
 
 const theme = createTheme();
@@ -38,7 +38,7 @@ export default function SignUp() {
 
   const userSignup = async (body) => {
     try {
-      const user = await axios.post(`${BASE_URL}/api/user/register`, body);
+      const user = await axios.post(`${BASE_URL_AUTH}/register`, body);
       console.log(user);
     } catch (error) {
       console.log(error);
