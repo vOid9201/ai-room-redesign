@@ -1,5 +1,5 @@
-const BASE_URL_AUTH = "https://ai-room-redesign.onrender.com/api/user";
-const BASE_URL_FOLDER = "https://ai-room-redesign.onrender.com/api/folder";
+const BASE_URL_AUTH = "http://localhost:5000/api/user";
+const BASE_URL_FOLDER = "http://localhost:5000/api/folder";
 const BASE_URL_IMAGE = "https://ai-room-redesign.onrender.com/api/image";
 const HEADER_CONFIG = {
     headers:{

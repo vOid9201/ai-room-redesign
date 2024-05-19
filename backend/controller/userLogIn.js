@@ -17,7 +17,8 @@ export const userLogIn = async (req, res, next) => {
 					console.log("User couldn't be logged in.");
 					throw new Error(error);
 				}
-				const body = { _id: user._id,fullName:user._fullName};
+				console.log(user);
+				const body = { _id: user._id,fullName:user.fullName};
 
 				const token = jwt.sign({ user: body}, process.env.SECRET, {
 					expiresIn: "24h",
