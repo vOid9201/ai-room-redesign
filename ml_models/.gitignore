@@ -1,0 +1,12 @@
+#Ignore  directories
+room_classifier/
+image_classifier/
+
+
+#Ignore files
+flask_backend/room_classifier_resnet50.pth
+
+*.pyc
+__pycache__/
+env/
+.venv/

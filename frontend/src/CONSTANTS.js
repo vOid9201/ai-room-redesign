@@ -1,10 +1,8 @@
 const BASE_URL_AUTH = "http://localhost:5000/api/user";
 const BASE_URL_FOLDER = "http://localhost:5000/api/folder";
-const BASE_URL_IMAGE = "https://ai-room-redesign.onrender.com/api/image";
-const HEADER_CONFIG = {
-    headers:{
-        Authorization: "Bearer " + JSON.parse(localStorage.getItem("token")), 
-    },
-};
+const BASE_URL_IMAGE = "http://localhost:5000/api/image";
+const BASE_URL_MODEL = "http://localhost:8080/predict";
+const PREDICTED_CLASS = ['bedroom','bathroom','kitchen','living','dining']
 
-export {BASE_URL_AUTH,BASE_URL_FOLDER,BASE_URL_IMAGE,HEADER_CONFIG};
+
+export {BASE_URL_AUTH,BASE_URL_FOLDER,BASE_URL_IMAGE,BASE_URL_MODEL,PREDICTED_CLASS};

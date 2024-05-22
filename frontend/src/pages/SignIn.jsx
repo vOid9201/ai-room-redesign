@@ -1,6 +1,5 @@
 import * as React from "react";
 import axios from "axios";
-import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -14,6 +13,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
+import {useAuth} from '../provider/authProvider';
 import { BASE_URL_AUTH } from "../CONSTANTS";
 
 async function signInUser(credentials) {
@@ -29,7 +29,8 @@ async function signInUser(credentials) {
 
 const theme = createTheme();
 
-export default function SignIn({ setToken }) {
+export default function SignIn() {
+  const {setToken} = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -45,7 +46,7 @@ export default function SignIn({ setToken }) {
 
     setToken(token);
 
-    navigate("/");
+    navigate("/",{replace:true});
   };
 
   return (
@@ -119,7 +120,3 @@ export default function SignIn({ setToken }) {
     </ThemeProvider>
   );
 }
-
-SignIn.propTypes = {
-  setToken: PropTypes.func.isRequired,
-};

@@ -9,7 +9,6 @@ export const validateFolder = async(req,res,next)=>{
     try{
 
         const folderId = req?.params?.folderId ? req.params.folderId : req.query.folderId;
-        
         const folder = await Folder.findOne({folderId: folderId});
         if(!folder){
             const error = new Error("No such folder exist");
