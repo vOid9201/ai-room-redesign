@@ -4,11 +4,39 @@ from flask_cors import CORS
 import torch
 import io
 import json
+import numpy as np
+from ultralytics import YOLO
 from model import model, preprocess, class_names
+from coco_names import get_coco_category_names as get_names , REQUIRED_OBJECTS as required_objects
 # from service import save_image_to_service
 
 app = Flask(__name__)
 CORS(app)
+
+@app.route('/predict-instance', methods=['POST'])
+def predict_instance():
+    if 'image' not in request.files:
+        return jsonify({'error':'No image provided'}),400
+    model = YOLO('yolov8s-seg.pt')
+    image_file = request.files['image']
+    image = Image.open(image_file).convert('RGB')
+    results = model(image)
+
+    result=[]    
+    for r in results:
+        # r.save()
+        xy = r.masks.xy
+        r = r.cpu().numpy()
+        names = get_names(r.boxes.cls)
+        data =  [{"cls": int(r.boxes.cls[i]),"object_names":names[i],"conf": float(r.boxes.conf[i]),"coordinates": xy[i].tolist()} for i in range(len(r.boxes.conf)) if names[i] in required_objects]
+
+        result.append(data)
+
+    result = json.dumps(result)
+    return jsonify({
+        'results':result
+    })
+
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -48,14 +76,7 @@ def predict():
     probability = probabilities[predicted_class].item()
 
     # If recognized as a room, send the image to another backend service
-    if predicted_class_name in ['bathroom', 'bedroom', 'kitchen','living','dining']:  # Replace with actual room classes
-        # # Extract authorization header and additional parameters from the request
-        # print("request form",request.form)
-        # authorization_header = request.headers.get('Authorization')
-        # folder_id = request.form.get('folderId')
-    
-        # print("Authorization_Header",authorization_header)
-        # print("folderId",folder_id)
+    if predicted_class_name in ['bathroom', 'bedroom', 'kitchen','living','dining']:
         print("predicted_class",predicted_class_name)
         return jsonify({
             'predicted_class': predicted_class_name,

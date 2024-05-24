@@ -5,6 +5,7 @@ image_classifier/
 
 #Ignore files
 flask_backend/room_classifier_resnet50.pth
+flask_backend/yolov8s-seg.pt
 
 *.pyc
 __pycache__/
