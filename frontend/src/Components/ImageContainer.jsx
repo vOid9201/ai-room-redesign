@@ -44,7 +44,7 @@ const getAllImages = async (folderId) => {
 
 const checkImage = async (formData) => {
   try {
-    const response = await axios.post(`${BASE_URL_MODEL}`, formData);
+    const response = await axios.post(`${BASE_URL_MODEL}/predict`, formData);
     return response;
   } catch (error) {
     throw new Error("could not run model");
@@ -94,7 +94,7 @@ const ImageContainer = () => {
 
   const handleAlert = () => {
     setAlert(false);
-    setOpen(true);
+    setOpen(false);
     setImageFile(null);
   };
 
@@ -109,7 +109,7 @@ const ImageContainer = () => {
           console.log("here");
           setAlert(false);
           setDialogBox(true);
-        } else setAlert(true);
+        } else {setAlert(true);setOpen(false)};
       })
       .catch((error) => {
         setError(error);
@@ -178,14 +178,15 @@ const ImageContainer = () => {
           {images?.map((image) => (
             <Image
               key={image.imageId}
-              imagedId={image.imageId}
+              imageId={image.imageId}
               imageName={image.imageName}
               imageUrl={image.imageUrl}
+              folderId={folderId}
             ></Image>
           ))}
           <img
             onClick={handleOpen}
-            src="add.png"
+            src="/add.png"
             alt="logo"
             className="cursor-pointer h-48 hover:opacity-70 border border-solid border-gray-500 hover:shadow-lg hover:bg-gray-200 bg-opacity-90"
           />

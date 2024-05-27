@@ -5,6 +5,7 @@ import SignUp from '../pages/SignUp';
 import SingIn from '../pages/SignIn';
 import Home from "../Components/Home";
 import ImageContainer from "../Components/ImageContainer";
+import ImageViewer from "../Components/ImageViewer";
 
 const Routes = ()=>{
     const {token} = useAuth;
@@ -26,7 +27,10 @@ const Routes = ()=>{
                     
                 },{
                     path:"/folders/:folderId",
-                    element:<ImageContainer/>
+                    element:<ImageContainer/>,
+                },{
+                    path:"/images/:imageId/:folderId",
+                    element:<ImageViewer/>
                 }
             ]
         }

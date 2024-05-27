@@ -25,7 +25,7 @@ export const uploader = async(req,res,next)=>{
         const imageID = (!imageId) ? uuidv4() : imageId;
 
         if(!imageId)
-            imageBuffer = await sharp(imageBuffer).resize(1024,1024,{fit:'inside'}).toBuffer();
+            imageBuffer = await sharp(imageBuffer).resize(512,512,{fit:sharp.fit.contain , background:{ r: 255, g: 255, b: 255, alpha: 1 }}).toBuffer();
 
         imageBuffer = imageBuffer.toString('base64');
 
