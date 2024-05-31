@@ -6,6 +6,7 @@ import SingIn from '../pages/SignIn';
 import Home from "../Components/Home";
 import ImageContainer from "../Components/ImageContainer";
 import ImageViewer from "../Components/ImageViewer";
+import { BooleanProvider } from "../provider/checkProvider";
 
 const Routes = ()=>{
     const {token} = useAuth;
@@ -27,10 +28,10 @@ const Routes = ()=>{
                     
                 },{
                     path:"/folders/:folderId",
-                    element:<ImageContainer/>,
+                    element:<BooleanProvider><ImageContainer/></BooleanProvider>,
                 },{
                     path:"/images/:imageId/:folderId",
-                    element:<ImageViewer/>
+                    element:<BooleanProvider><ImageViewer/></BooleanProvider>
                 }
             ]
         }

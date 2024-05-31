@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import {
@@ -10,6 +10,7 @@ import {
 import NavBar from "./NavBar";
 import Image from "./Image";
 import { Box, Button, Modal, Stack, Typography,Alert } from "@mui/material";
+import BooleanContext from "../provider/checkProvider";
 
 const style = {
   position: "absolute",
@@ -78,6 +79,9 @@ const ImageContainer = () => {
   const [openAlert, setAlert] = useState(false);
   const [dialogBox, setDialogBox] = useState(false);
   const [isUplaoding ,setIsUplaoding] = useState(false);
+  const {checkReload} = useContext(BooleanContext);
+
+  // const [check ,setCheck] = useState(false);
 
   const handleOpen = () => {
     setOpen(true);
@@ -164,7 +168,7 @@ const ImageContainer = () => {
       .finally(() => {
         setLoading(false);
       });
-  }, [folderId]);
+  }, [folderId,checkReload]);
 
   return (
     <div>
@@ -182,6 +186,7 @@ const ImageContainer = () => {
               imageName={image.imageName}
               imageUrl={image.imageUrl}
               folderId={folderId}
+              // setCheck={setCheck}
             ></Image>
           ))}
           <img

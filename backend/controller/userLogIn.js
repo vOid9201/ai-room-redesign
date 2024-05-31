@@ -1,6 +1,9 @@
 import passport from 'passport';
 import jwt from 'jsonwebtoken';
 import '../utils/passport.js';
+import dotenv from 'dotenv';
+dotenv.config();
+
 
 export const userLogIn = async (req, res, next) => {
 	passport.authenticate("user_login", async (err, user, info) => {

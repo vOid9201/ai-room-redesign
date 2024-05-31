@@ -110,7 +110,7 @@ def edit_images():
         print("data",data)
         image_url = data['image_url']
         coordinates = data['coordinates']
-        color = "#0000FF"
+        color = data['colorValue']
         style = data['objectStyle']
         name = "couch"
 
@@ -120,8 +120,6 @@ def edit_images():
 
         image_path = "image.png"
         mask_path = "mask.png"
-        # image.save(image_path)
-        # mask.save(mask_path)
 
         with open(image_path, "wb") as img_file:
             image.save(img_file, format='PNG')
@@ -179,6 +177,7 @@ def edit_images():
     
 @app.route('/static/<path:filename>')
 def serve_static(filename):
+    print("i am here")
     return send_from_directory('static',filename)
 
 if __name__ == '__main__':
